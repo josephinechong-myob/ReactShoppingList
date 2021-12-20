@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ShoppingItem from './ShoppingItem';
 import './style.css';
 
 export default class Main extends React.Component{
@@ -15,11 +15,26 @@ export default class Main extends React.Component{
             ],
             itemToAdd:''
         }
+
+        //this.handleClick = this.handleClick.bind(this);
+        this.handleTick = this.handleTick.bind(this);
     }
    
     handleClick(event){
         event.preventDefault();
         console.log('I was clicked!');
+    }
+
+    handleTick(id){
+        console.log(id); //set checked to true to disable button - update the state
+        for (var i = 0; i < this.state.items.length; i++) {
+        
+                this.state.items[i].checked = true;
+                console.log(this.state.items[i].checked);
+                ShoppingItem.item.button.disabled = true;
+                //ShoppingItem.item.span.className = "ticked";
+            
+        }
     }
 
     render(){
@@ -34,11 +49,12 @@ export default class Main extends React.Component{
                 
                 <div>
                     {this.state.items.map(item => (
-                        <div key={item.id}>
-                            <h2>{JSON.stringify(item.name)}</h2>
-                        </div>
+                        
+                        <ShoppingItem key={item.id} item={item} handleTick={this.handleTick}/>
+                        
                     ))}   
                 </div>
+                
             </form>
             </>
         )
