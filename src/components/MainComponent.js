@@ -15,13 +15,21 @@ export default class Main extends React.Component{
             ],
             itemToAdd:''
         }
-        //this.handleClick = this.handleClick.bind(this);
+        this.handleAddItem = this.handleAddItem.bind(this);
         this.handleTick = this.handleTick.bind(this);
+        this.itemToAddChanged = this.itemToAddChanged.bind(this);
     }
    
-    handleClick(event){
+    handleAddItem(event){
         event.preventDefault();
         console.log('I was clicked!');
+        var items = this.state.items;
+        var itemToAdd = this.state.itemToAdd;
+        var newItem = { id: (items.length+1).toString(), name: itemToAdd, checked: false };
+        items.push(newItem);
+        this.setState({
+            items
+        })
     }
 
     handleTick(id){
@@ -35,8 +43,17 @@ export default class Main extends React.Component{
         }
 
         this.setState({ 
-            itemsArray: [...itemsArray]
+            items:itemsArray //can change itemsArray to items
          });
+    }
+
+    itemToAddChanged(event){
+        event.preventDefault();
+        var itemToAdd = event.target.value;
+        this.setState({
+            itemToAdd
+        })
+
     }
 
     render(){
@@ -46,8 +63,8 @@ export default class Main extends React.Component{
     
             <form id={"form"}>
                 <span>What would you like to add?</span>
-                <input type={"text"} id={"new-item"} onChange={(event)=>{console.log(event.target.value)}} />
-                <button id={"add-me-button"} onClick={this.handleClick}>Add me!</button>
+                <input type={"text"} onChange={this.itemToAddChanged} />
+                <button id={"add-me-button"} onClick={this.handleAddItem}>Add me!</button>
                 
                 <div>
                     {this.state.items.map(item => (
