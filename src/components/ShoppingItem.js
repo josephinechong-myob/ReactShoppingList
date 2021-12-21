@@ -5,10 +5,7 @@ import { useImperativeHandle } from 'react/cjs/react.production.min';
 export default class ShoppingItem extends React.Component{
     constructor(props){
         super(props);
-
-        this.state = {
-        
-        }
+        this.state = { }
         this.isChecked = this.isChecked.bind(this);
     }
 
@@ -17,7 +14,6 @@ export default class ShoppingItem extends React.Component{
         this.props.handleTick(this.props.item.id);
     }
 
-    
     render(){
     return <div className={"item"}>
         <span className={this.props.item.checked ? 'ticked' : null }>{this.props.item.name}</span>

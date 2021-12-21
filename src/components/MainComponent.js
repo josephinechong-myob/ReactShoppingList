@@ -15,7 +15,6 @@ export default class Main extends React.Component{
             ],
             itemToAdd:''
         }
-
         //this.handleClick = this.handleClick.bind(this);
         this.handleTick = this.handleTick.bind(this);
     }
@@ -26,7 +25,6 @@ export default class Main extends React.Component{
     }
 
     handleTick(id){
-        //console.log(id);
         var itemsArray = this.state.items;
 
         for (var i = 0; i < itemsArray.length; i++) {
@@ -53,9 +51,7 @@ export default class Main extends React.Component{
                 
                 <div>
                     {this.state.items.map(item => (
-                        
                         <ShoppingItem key={item.id} item={item} handleTick={this.handleTick}/>
-                        
                     ))}   
                 </div>
                 
