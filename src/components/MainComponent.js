@@ -26,15 +26,20 @@ export default class Main extends React.Component{
     }
 
     handleTick(id){
-        console.log(id); //set checked to true to disable button - update the state
-        for (var i = 0; i < this.state.items.length; i++) {
+        console.log(id);
         
-                this.state.items[i].checked = true;
-                console.log(this.state.items[i].checked);
-                ShoppingItem.item.button.disabled = true;
-                //ShoppingItem.item.span.className = "ticked";
-            
+        var itemsArray = this.state.items;
+
+        for (var i = 0; i < itemsArray.length; i++) {
+
+            if(itemsArray[i].id === id){
+                itemsArray[i].checked = true;
+            }
         }
+
+        this.setState({ 
+            itemsArray: [...itemsArray]
+         });
     }
 
     render(){
