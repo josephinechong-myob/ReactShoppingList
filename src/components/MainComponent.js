@@ -25,11 +25,20 @@ export default class Main extends React.Component{
         console.log('I was clicked!');
         var items = this.state.items;
         var itemToAdd = this.state.itemToAdd;
-        var newItem = { id: (items.length+1).toString(), name: itemToAdd, checked: false };
-        items.push(newItem);
-        this.setState({
-            items
-        })
+        var inputValidator = /[A-Za-z]+/
+
+        if(itemToAdd !== '' && inputValidator.test(itemToAdd)){
+            var newItem = { id: (items.length+1).toString(), name: itemToAdd, checked: false };
+            items.push(newItem);
+            itemToAdd = '';
+            this.setState({
+                items,
+                itemToAdd
+            })
+        }
+        else{
+            window.alert("Please enter a value")
+        }
     }
 
     handleTick(id){
@@ -53,7 +62,6 @@ export default class Main extends React.Component{
         this.setState({
             itemToAdd
         })
-
     }
 
     render(){
@@ -63,7 +71,7 @@ export default class Main extends React.Component{
     
             <form id={"form"}>
                 <span>What would you like to add?</span>
-                <input type={"text"} onChange={this.itemToAddChanged} />
+                <input type={"text"} onChange={this.itemToAddChanged} value={this.state.itemToAdd}/>
                 <button id={"add-me-button"} onClick={this.handleAddItem}>Add me!</button>
                 
                 <div>
