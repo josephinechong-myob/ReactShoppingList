@@ -26,8 +26,7 @@ export default class Main extends React.Component{
     }
 
     handleTick(id){
-        console.log(id);
-        
+        //console.log(id);
         var itemsArray = this.state.items;
 
         for (var i = 0; i < itemsArray.length; i++) {

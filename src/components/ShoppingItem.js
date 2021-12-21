@@ -17,9 +17,10 @@ export default class ShoppingItem extends React.Component{
         this.props.handleTick(this.props.item.id);
     }
 
+    
     render(){
     return <div className={"item"}>
-        <span>{this.props.item.name}</span>
+        <span className={this.props.item.checked ? 'ticked' : null }>{this.props.item.name}</span>
         <button disabled={this.props.item.checked} onClick={this.isChecked}>Tick!</button>
         </div>
 
