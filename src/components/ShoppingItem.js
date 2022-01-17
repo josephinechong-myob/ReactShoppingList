@@ -17,7 +17,7 @@ export default class ShoppingItem extends React.Component{
     render(){
     return <div className={"item"}>
         <span className={this.props.item.checked ? 'ticked' : null }>{this.props.item.name}</span>
-        <button disabled={this.props.item.checked} onClick={this.isChecked}>Tick!</button>
+        <button disabled={this.props.item.checked} onClick={this.isChecked} data-testid={"shopping-item-button-"+this.props.item.name} >Tick!</button>
         </div>
 
     }
