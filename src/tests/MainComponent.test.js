@@ -3,7 +3,7 @@ import Main from '../../src/components/MainComponent'
 
 //test functionality (UI or UX)
 
-// test that page does render with 3 items, textbox and title
+// test that page does load
 test('Should display page title and textbox to add items to shopping list', async () => {
     //arrange
     render(<Main />);
@@ -25,12 +25,12 @@ test('Should display page title and textbox to add items to shopping list', asyn
 // test for adding item 
 test('Should display new shopping item when new item is added to the list', async () => {
     //arrange
-    render(<Main />); //read doc for all the functionality for testing
+    render(<Main />);
 
     //act
     const textbox = screen.getByRole("textbox");
     fireEvent.change(textbox, {target: {value: "Mint"}});
-    const additembutton = screen.getByText("Add me!");//how to get a button 
+    const additembutton = screen.getByText("Add me!");
     fireEvent(additembutton, new MouseEvent("click", { bubbles: true, cancelable: false }));
     
     //assert
@@ -44,28 +44,17 @@ test('Should only be able to tick item button once', async () => {
   render(<Main />);
 
   //act
-  //const milkItemStyle = screen.getByText("Milk").style
-  //const milkItemStyle = screen.getByText("Milk")
-  //const milkItemButton = screen.getByText("Milk").closest(".item")
-  //const milkItemButton = screen.getByText("Milk").closest(".item").closest("button")
-  const buttons = await screen.findAllByText("Tick!");
-  const milkItemButton = buttons[0];
   const datatestidmilk = await screen.getByTestId("shopping-item-button-Milk");
-  //fireEvent(milkItemButton, new MouseEvent("click", { bubbles: true, cancelable: false }))
   fireEvent(datatestidmilk, new MouseEvent("click", { bubbles: true, cancelable: false }));
   const milkItemStyle = screen.getByText("Milk");
   
   //assert
   expect(datatestidmilk).toBeDisabled();
-  //expect(milkItemButton).toBeDisabled()
-  //expect(milkItemStyle).toHaveStyle("text-decoration: line-through;")
-  //await waitFor(()=>expect(milkItemStyle.style.textDecoration).toBe('line-through'));
   expect(milkItemStyle.className).toBe("ticked");
-  //expect(milkItemStyle.style.textDecoration).toBe("line-through")
   
 });
 
-// can't add item if you add invaid character
+// handling invaid character
 test('Should alert to enter valid text if invalid characters entered', async () => {
   //arrange
   render(<Main />);
