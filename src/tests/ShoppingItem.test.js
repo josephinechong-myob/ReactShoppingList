@@ -13,5 +13,5 @@ test('Should call handleClick when button is clicked', ()=>{
     
     //assert
     expect(handleTickMock.mock.calls.length).toBe(1);
-    expect(handleTickMock.mock.calls[0][0]).toBe("id");
+    expect(handleTickMock.mock.calls[0][0]).toBe("id"); //mocks.calls is an array
 })

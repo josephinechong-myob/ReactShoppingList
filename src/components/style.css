@@ -5,10 +5,12 @@ body{
 
 h1 {text-align: center;}
 
-button {
+#add-me-button {
     padding-left: 20px;
     padding-right: 20px; 
+    margin-left: 20px;
 }
+
 
 .item{
     text-align: center;

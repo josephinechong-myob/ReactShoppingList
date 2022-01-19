@@ -1,6 +1,7 @@
 import React from 'react';
 import ShoppingItem from './ShoppingItem';
 import './style.css';
+import Button from '@mui/material/Button';
 
 export default class Main extends React.Component{
 
@@ -13,11 +14,34 @@ export default class Main extends React.Component{
                 { id: "2", name: "Bread", checked: false},
                 { id: "3", name: "Eggs", checked: false}
             ],
-            itemToAdd:''
+            itemToAdd:'',
+            catfact:''
         }
         this.handleAddItem = this.handleAddItem.bind(this);
         this.handleTick = this.handleTick.bind(this);
         this.itemToAddChanged = this.itemToAddChanged.bind(this);
+    }
+
+    componentDidMount(){
+        fetch('https://catfact.ninja/fact')
+        .then(
+            (response)=>{
+                if (response.status !==200){
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+                response.json().then((data)=> {
+                    console.log(data.fact);
+                    this.setState({
+                        catfact: data.fact
+                    })
+                });
+            }
+        )
+        .catch((err)=>{
+            console.log('Fetch Error :-S', err);
+        });
     }
    
     handleAddItem(event){
@@ -32,7 +56,7 @@ export default class Main extends React.Component{
             items.push(newItem);
             itemToAdd = '';
             this.setState({
-                items,
+                items: items,
                 itemToAdd
             })
         }
@@ -68,12 +92,12 @@ export default class Main extends React.Component{
         return(
             <>
             <h1>My Shopping List</h1>
-    
-            <form id={"form"}>
+            <h2>{this.state.catfact}</h2>
+            <form id={"form"} onSubmit={(event)=>event.preventDefault()}>
                 <span>What would you like to add?</span>
                 <input type={"text"} onChange={this.itemToAddChanged} value={this.state.itemToAdd}/>
-                <button id={"add-me-button"} onClick={this.handleAddItem}>Add me!</button>
-                
+                <Button id={"add-me-button"} onClick={this.handleAddItem} variant="contained">Add me!</Button>
+
                 <div>
                     {this.state.items.map(item => (
                         <ShoppingItem key={item.id} item={item} handleTick={this.handleTick}/>

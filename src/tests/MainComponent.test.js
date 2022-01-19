@@ -3,6 +3,30 @@ import Main from '../../src/components/MainComponent'
 
 //test functionality (UI or UX)
 
+
+//fact is in the UI
+const mockResponse = {status: 200, 
+  json: async () => Promise.resolve({fact:'cats like Jeremy, but Jeremy is allergic to cats'})
+  }
+  //mocking fetch fn
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockResolvedValue(mockResponse)
+  });
+  
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test('should display cat fact', async () => {
+    //arrange
+    render(<Main />);
+
+    //act
+
+    //assert fact is in UI
+    await waitFor(() => expect(screen.getByText('cats like Jeremy, but Jeremy is allergic to cats')).toBeInTheDocument());
+  })
+
 // test that page does load
 test('Should display page title and textbox to add items to shopping list', async () => {
     //arrange
@@ -69,7 +93,6 @@ test('Should alert to enter valid text if invalid characters entered', async () 
   //assert
   expect(alertSpy).toHaveBeenCalledTimes(1);
   expect(window.alert).toHaveBeenCalledWith("Please enter a value");
-  expect(await screen.findAllByText('Tick!')).toHaveLength(3);
 });
 
 test('Should not add item to list when invalid input given', async () => {
