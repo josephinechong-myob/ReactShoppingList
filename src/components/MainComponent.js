@@ -92,7 +92,7 @@ export default class Main extends React.Component{
         return(
             <>
             <h1>My Shopping List</h1>
-            <h2>{this.state.catfact}</h2>
+            <h2 id={"catfact"}>{this.state.catfact}</h2>
             <form id={"form"} onSubmit={(event)=>event.preventDefault()}>
                 <span>What would you like to add?</span>
                 <input type={"text"} onChange={this.itemToAddChanged} value={this.state.itemToAdd}/>
