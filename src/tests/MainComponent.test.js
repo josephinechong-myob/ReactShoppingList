@@ -21,11 +21,12 @@ const mockResponse = {status: 200,
     //arrange
     render(<Main />);
 
-    //act
+    //act (Api call happening in the background)
 
     //assert fact is in UI
     await waitFor(() => expect(screen.getByText('cats like Jeremy, but Jeremy is allergic to cats')).toBeInTheDocument());
-  })
+  }) //waiting for expect to be true for the api call to be as expected
+
 
 // test that page does load
 test('Should display page title and textbox to add items to shopping list', async () => {
